@@ -1,4 +1,4 @@
-package org.example.leaguemanagercoopwork.Controller;
+package org.example.leaguemanagercoopwork.controller;
 
 public class TeamController {
 }
