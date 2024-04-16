@@ -1,8 +1,8 @@
-package org.example.leaguemanagercoopwork.Player;
+package org.example.leaguemanagercoopwork.player;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.example.leaguemanagercoopwork.Team.Team;
+import org.example.leaguemanagercoopwork.team.Team;
 
 @Entity
 @Data

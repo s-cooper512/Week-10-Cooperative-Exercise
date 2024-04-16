@@ -1,8 +1,8 @@
-package org.example.leaguemanagercoopwork.Tournament;
+package org.example.leaguemanagercoopwork.tournament;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.example.leaguemanagercoopwork.Team.Team;
+import org.example.leaguemanagercoopwork.team.Team;
 
 import java.util.List;
 

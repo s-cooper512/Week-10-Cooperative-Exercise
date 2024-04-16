@@ -1,4 +1,4 @@
-package org.example.leaguemanagercoopwork.Team;
+package org.example.leaguemanagercoopwork.team;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
