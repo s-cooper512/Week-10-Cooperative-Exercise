@@ -16,6 +16,11 @@ public class TournamentService {
     ITeamRepository teamRepository;
 
     // ========== BASIC CRUD OPERATIONS ==============
+    // get all tournaments
+    public List<Tournament> getAllTournaments() {
+        return tournamentRepository.findAll();
+    }
+
     // create new tournament
     public Tournament createTournament(Tournament tournament) {
         return tournamentRepository.save(tournament); // saves tournament object to DB
@@ -46,23 +51,47 @@ public class TournamentService {
         tournamentRepository.delete(tournamentToDelete); // deletes tournament from DB
     }
 
-    public List<Tournament> getAllTournaments() {
-        return tournamentRepository.findAll();
-    }
-
+    // ========== ADDITIONAL FUNCTIONALITY ==============
+    // add a team to a tournament
     public void addTeamToTournament(Long tournamentId, Long teamId) throws Exception {
         // find tournament to add team to
         Tournament tournament = tournamentRepository.findById(tournamentId)
                 .orElseThrow(() -> new Exception("Unable to find tournament with ID " + tournamentId));
 
         // find team to add to the tournament
-        Team team = teamRepository.findById(teamId)
-                .orElseThrow(() -> new Exception("Unable to find tournament with ID " + teamId));
+        Team teamToAdd = teamRepository.findById(teamId)
+                .orElseThrow(() -> new Exception("Unable to find team with ID " + teamId));
 
         // add team to tournament
-        tournament.getTeams().add(team);
+        tournament.getTeams().add(teamToAdd);
 
         // save tournament changes to DB
         tournamentRepository.save(tournament);
+    }
+
+    public void deleteTeamFromTournament(Long tournamentId, Long teamId) throws Exception {
+        // find tournament to add team to
+        Tournament tournament = tournamentRepository.findById(tournamentId)
+                .orElseThrow(() -> new Exception("Unable to find tournament with ID " + tournamentId));
+
+        // find team that is in the tournament that we want to remove
+        Team teamToDelete = teamRepository.findById(teamId)
+                .orElseThrow(() -> new Exception("Unable to find team with ID " + teamId));
+
+        // Remove team from list of teams on the tournament
+        tournament.getTeams().remove(teamToDelete);
+
+        // Save tournament to database
+        tournamentRepository.save(tournament);
+    }
+
+    // get all teams in a tournament
+    public List<Team> getAllTeamsInTournament(Long id) throws Exception {
+        // find tournament we want the list of teams from
+        Tournament tournament = tournamentRepository.findById(id)
+                .orElseThrow(() -> new Exception("Unable to find tournament with ID " + id));
+
+        // return a list of teams belonging to the tournament
+        return tournament.getTeams();
     }
 }

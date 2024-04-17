@@ -1,5 +1,6 @@
 package org.example.leaguemanagercoopwork.controller;
 
+import org.example.leaguemanagercoopwork.team.Team;
 import org.example.leaguemanagercoopwork.tournament.ITournamentRepository;
 import org.example.leaguemanagercoopwork.tournament.Tournament;
 import org.example.leaguemanagercoopwork.tournament.TournamentService;
@@ -54,4 +55,15 @@ public class TournamentController {
         tournamentService.addTeamToTournament(tournamentId, teamId);
     }
 
+    // delete team from tournament
+    @DeleteMapping("/{tournamentId}/teams/{teamId}")
+    public void deleteTeamFromTournament(@PathVariable Long tournamentId, @PathVariable Long teamId) throws Exception {
+        tournamentService.deleteTeamFromTournament(tournamentId, teamId);
+    }
+
+    // get all teams in a tournament
+    @GetMapping("/{id}/teams")
+    public List<Team> getAllTeamsInTournament(@PathVariable Long id) throws Exception {
+        return tournamentService.getAllTeamsInTournament(id);
+    }
 }
