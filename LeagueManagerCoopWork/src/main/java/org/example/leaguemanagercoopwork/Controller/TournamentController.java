@@ -68,6 +68,7 @@ public class TournamentController {
     @GetMapping("/{id}/teams")
     public List<Team> getAllTeamsInTournament(@PathVariable Long id) throws Exception {
         return tournamentService.getAllTeamsInTournament(id);
+    }
 
     @GetMapping("/{ID}/players")
     public List<Player> getAllPlayersInTournament(@PathVariable Long ID) throws Exception {
