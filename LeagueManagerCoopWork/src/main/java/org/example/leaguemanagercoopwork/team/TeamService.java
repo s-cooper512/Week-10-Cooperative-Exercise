@@ -10,13 +10,13 @@ import java.util.Optional;
 public class TeamService {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
     }
 
-    public static Optional<Team> getTeamById(Long id) {
+    public Optional<Team> getTeamById(Long id) {
         return teamRepository.findById(id);
     }
 
@@ -26,11 +26,5 @@ public class TeamService {
 
     public void deleteTeam(Long id) {
         teamRepository.deleteById(id);
-    }
-
-    public void addPlayerToTeam(Long teamId, Long playerId) {
-    }
-
-    public void deletePlayerFromTeam(Long teamId, Long playerId) {
     }
 }
