@@ -12,6 +12,7 @@ public class TournamentService {
 
     @Autowired
     ITournamentRepository tournamentRepository;
+    @Autowired
     ITeamRepository teamRepository;
 
     // ========== BASIC CRUD OPERATIONS ==============
