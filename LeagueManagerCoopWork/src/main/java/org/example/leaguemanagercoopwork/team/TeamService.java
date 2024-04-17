@@ -10,7 +10,7 @@ import java.util.Optional;
 public class TeamService {
 
     @Autowired
-    private TeamRepository teamRepository;
+    private ITeamRepository teamRepository;
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();

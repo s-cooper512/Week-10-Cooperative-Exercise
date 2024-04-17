@@ -46,4 +46,12 @@ public class TournamentController {
     public void deleteTournament(@PathVariable Long id) throws Exception {
         tournamentService.deleteTournament(id);
     }
+
+    // ========== ADDITIONAL FUNCTIONALITY ==============
+    // Add a team to a tournament
+    @PostMapping("/{tournamentId}/teams/{teamId}")
+    public void addTeamToTournament(@PathVariable Long tournamentId, @PathVariable Long teamId) throws Exception {
+        tournamentService.addTeamToTournament(tournamentId, teamId);
+    }
+
 }

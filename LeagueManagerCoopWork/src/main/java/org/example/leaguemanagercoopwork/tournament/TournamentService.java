@@ -1,5 +1,7 @@
 package org.example.leaguemanagercoopwork.tournament;
 
+import org.example.leaguemanagercoopwork.team.ITeamRepository;
+import org.example.leaguemanagercoopwork.team.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ public class TournamentService {
 
     @Autowired
     ITournamentRepository tournamentRepository;
+    ITeamRepository teamRepository;
 
     // ========== BASIC CRUD OPERATIONS ==============
     // create new tournament
@@ -44,5 +47,21 @@ public class TournamentService {
 
     public List<Tournament> getAllTournaments() {
         return tournamentRepository.findAll();
+    }
+
+    public void addTeamToTournament(Long tournamentId, Long teamId) throws Exception {
+        // find tournament to add team to
+        Tournament tournament = tournamentRepository.findById(tournamentId)
+                .orElseThrow(() -> new Exception("Unable to find tournament with ID " + tournamentId));
+
+        // find team to add to the tournament
+        Team team = teamRepository.findById(teamId)
+                .orElseThrow(() -> new Exception("Unable to find tournament with ID " + teamId));
+
+        // add team to tournament
+        tournament.getTeams().add(team);
+
+        // save tournament changes to DB
+        tournamentRepository.save(tournament);
     }
 }
