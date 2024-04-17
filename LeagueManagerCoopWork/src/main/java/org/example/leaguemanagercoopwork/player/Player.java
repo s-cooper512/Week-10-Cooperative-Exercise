@@ -1,5 +1,6 @@
 package org.example.leaguemanagercoopwork.player;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,6 +19,8 @@ public class Player {
     private String name;
 
     @ManyToOne
+    @JoinColumn(name = "team_id")
+    @JsonBackReference
     private Team team;
 }
 
