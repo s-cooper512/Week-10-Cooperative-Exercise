@@ -16,9 +16,9 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
-//    public static Optional<Team> getTeamById(Long id) {
-//        return teamRepository.findById(id);
-//    }
+    public Optional<Team> getTeamById(Long id) {
+        return teamRepository.findById(id);
+    }
 
     public Team saveTeam(Team team) {
         return teamRepository.save(team);
@@ -26,11 +26,5 @@ public class TeamService {
 
     public void deleteTeam(Long id) {
         teamRepository.deleteById(id);
-    }
-
-    public void addPlayerToTeam(Long teamId, Long playerId) {
-    }
-
-    public void deletePlayerFromTeam(Long teamId, Long playerId) {
     }
 }
