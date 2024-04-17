@@ -17,9 +17,6 @@ public class TeamController {
     @Autowired
     private TeamService teamService;
 
-    @Autowired
-    private PlayerService playerService;
-
     @GetMapping
     public List<Team> getAllTeams() {
         return teamService.getAllTeams();
@@ -48,25 +45,11 @@ public class TeamController {
 
     @PutMapping("/{teamID}/{playerID}")
     public String addPlayerToTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
-        Optional<Team> thisTeam = teamService.getTeamById(teamID);
-        Team tempTeam = thisTeam.get();
-        Player thisPlayer = playerService.getPlayerById(playerID);
-
-        thisPlayer.setTeam(tempTeam);
-        playerService.createPlayer(thisPlayer);
-
-        return thisPlayer.getName() + " moved to " + tempTeam.getName();
+        return teamService.addPlayerToTeam(teamID, playerID);
     }
 
     @DeleteMapping("/{teamID}/{playerID}")
     public String removePlayerFromTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
-        Optional<Team> thisTeam = teamService.getTeamById(teamID);
-        Team tempTeam = thisTeam.get();
-        Player thisPlayer = playerService.getPlayerById(playerID);
-
-        thisPlayer.setTeam(null);
-        playerService.createPlayer(thisPlayer);
-
-        return thisPlayer.getName() + " removed from " + tempTeam.getName();
+        return teamService.removePlayerFromTeam(teamID, playerID);
     }
 }

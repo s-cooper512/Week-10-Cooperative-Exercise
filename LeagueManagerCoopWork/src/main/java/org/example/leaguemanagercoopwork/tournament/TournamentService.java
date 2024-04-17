@@ -1,9 +1,11 @@
 package org.example.leaguemanagercoopwork.tournament;
 
+import org.example.leaguemanagercoopwork.player.Player;
 import org.example.leaguemanagercoopwork.team.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -45,5 +47,15 @@ public class TournamentService {
 
     public List<Tournament> getAllTournaments() {
         return tournamentRepository.findAll();
+    }
+
+    public List<Player> getAllPlayersInTournament(Long ID) throws Exception {
+        List<Team> allTeams = getTournamentById(ID).getTeams();
+        List<Player> playerList = new ArrayList<>();
+        allTeams.forEach(team -> {
+            playerList.addAll(team.getPlayers());
+        });
+
+        return playerList;
     }
 }

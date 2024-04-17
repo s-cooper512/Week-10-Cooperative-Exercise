@@ -19,9 +19,6 @@ public class TournamentController {
     @Autowired
     TournamentService tournamentService;
 
-    @Autowired
-    private TeamService teamService;
-
     // ========== BASIC CRUD OPERATIONS ==============
     // get all tournaments
     @GetMapping
@@ -56,12 +53,6 @@ public class TournamentController {
 
     @GetMapping("/{ID}/players")
     public List<Player> getAllPlayersInTournament(@PathVariable Long ID) throws Exception {
-        List<Team> allTeams = tournamentService.getTournamentById(ID).getTeams();
-        List<Player> playerList = new ArrayList<>();
-        allTeams.forEach(team -> {
-            playerList.addAll(team.getPlayers());
-        });
-
-        return playerList;
+        return tournamentService.getAllPlayersInTournament(ID);
     }
 }
