@@ -26,8 +26,8 @@ public class PlayerController {
 
     // update a player's details
     @PutMapping("/{id}")
-    public Player updatePlayer(@PathVariable Long id, @RequestBody Player player) throws Exception {
-        return playerService.updatePlayer(id, player);
+    public Player updatePlayer(@PathVariable Long id, @RequestBody Player playerDetails) throws Exception {
+        return playerService.updatePlayer(id, playerDetails);
     }
 
     @DeleteMapping("/{id}")

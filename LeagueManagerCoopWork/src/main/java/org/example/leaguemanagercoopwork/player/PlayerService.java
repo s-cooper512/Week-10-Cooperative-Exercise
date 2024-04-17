@@ -18,20 +18,20 @@ public class PlayerService {
                 .orElseThrow(() -> new Exception("Player not found with id " + id));
     }
 
-    public Player updatePlayer(Long id, Player player) throws Exception {
-        Player existingPlayer = playerRepository.findById(id) // finds an existing player with the desired ID
+    public Player updatePlayer(Long id, Player playerDetails) throws Exception {
+        Player playerToUpdate = playerRepository.findById(id) // finds an existing player we want to updated
                 .orElseThrow(() -> new Exception("Player not found with id " + id)); // throws exception if ID is not found
 
-        existingPlayer.setName(player.getName()); // sets the name to whatever was provided by the player object
-        existingPlayer.setTeam(player.getTeam()); // sets the team to whatever was provided by the player object
+        playerToUpdate.setName(playerDetails.getName()); // updates player name to provided team name
+        playerToUpdate.setTeam(playerDetails.getTeam()); // updates player team to provided team
 
-        return playerRepository.save(player); // saves to the database
+        return playerRepository.save(playerToUpdate); // saves updated player to the database
     }
 
     public void deletePlayer(Long id) throws Exception {
-        Player player = playerRepository.findById(id) // finds player by the ID and assigns to player object
+        Player playerToDelete = playerRepository.findById(id) // finds player by the ID and assigns to player object
                         .orElseThrow(() -> new Exception("Player not found with ID")); // 
 
-        playerRepository.delete(player);
+        playerRepository.delete(playerToDelete); // deletes player from DB
     }
 }
