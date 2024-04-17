@@ -46,16 +46,27 @@ public class TeamController {
         return "Team added successfully!";
     }
 
-//    @PutMapping("/{teamID}/{playerID}")
-//    public String addPlayerToTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
-//        Optional<Team> thisTeam = teamService.getTeamById(teamID);
-//        Team tempTeam = thisTeam.get();
-//        List<Player> existingPlayersOnTeam = tempTeam.getPlayers();
-//        Player thisPlayer = playerService.getPlayerById(playerID);
-//
-//        existingPlayersOnTeam.add(thisPlayer);
-//        tempTeam.setPlayers(existingPlayersOnTeam);
-//
-//        return teamService.updateTeam(teamID, tempTeam);
-//    }
+    @PutMapping("/{teamID}/{playerID}")
+    public String addPlayerToTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
+        Optional<Team> thisTeam = teamService.getTeamById(teamID);
+        Team tempTeam = thisTeam.get();
+        Player thisPlayer = playerService.getPlayerById(playerID);
+
+        thisPlayer.setTeam(tempTeam);
+        playerService.createPlayer(thisPlayer);
+
+        return thisPlayer.getName() + " moved to " + tempTeam.getName();
+    }
+
+    @DeleteMapping("/{teamID}/{playerID}")
+    public String removePlayerFromTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
+        Optional<Team> thisTeam = teamService.getTeamById(teamID);
+        Team tempTeam = thisTeam.get();
+        Player thisPlayer = playerService.getPlayerById(playerID);
+
+        thisPlayer.setTeam(null);
+        playerService.createPlayer(thisPlayer);
+
+        return thisPlayer.getName() + " removed from " + tempTeam.getName();
+    }
 }
