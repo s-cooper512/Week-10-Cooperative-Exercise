@@ -6,6 +6,8 @@ import org.example.leaguemanagercoopwork.tournament.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/tournaments")
 @RestController
 public class TournamentController {
@@ -14,6 +16,12 @@ public class TournamentController {
     TournamentService tournamentService;
 
     // ========== BASIC CRUD OPERATIONS ==============
+    // get all tournaments
+    @GetMapping
+    public List<Tournament> getAllTournaments() {
+        return tournamentService.getAllTournaments();
+    }
+
     //create new tournament
     @PostMapping
     public Tournament createTournament(@RequestBody Tournament tournament) {

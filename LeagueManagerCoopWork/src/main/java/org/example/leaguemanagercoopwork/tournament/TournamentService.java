@@ -3,6 +3,8 @@ package org.example.leaguemanagercoopwork.tournament;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TournamentService {
 
@@ -38,5 +40,9 @@ public class TournamentService {
                 .orElseThrow(() -> new Exception("Tournament not found with ID " + id)); // throws exception if it doesn't exist
 
         tournamentRepository.delete(tournamentToDelete); // deletes tournament from DB
+    }
+
+    public List<Tournament> getAllTournaments() {
+        return tournamentRepository.findAll();
     }
 }
