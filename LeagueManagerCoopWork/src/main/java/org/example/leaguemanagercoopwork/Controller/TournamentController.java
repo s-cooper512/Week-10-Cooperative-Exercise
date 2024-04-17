@@ -51,26 +51,4 @@ public class TournamentController {
     public void deleteTournament(@PathVariable Long id) throws Exception {
         tournamentService.deleteTournament(id);
     }
-
-    @PutMapping("/{tournamentID}/{teamID}")
-    public String addTeamToTournament (@PathVariable Long tournamentID, @PathVariable Long teamID) throws Exception {
-        Tournament thisTournament = tournamentService.getTournamentById(tournamentID);
-        Team thisTeam = teamService.getTeamById(teamID).get();
-
-        tournamentService.addTournamentTeams(tournamentID, thisTeam);
-
-        return thisTeam + " was added to " + thisTournament;
-    }
-
-//    @DeleteMapping("/{tournamentID}/{teamID}")
-//    public String removeTeamFromTournament (@PathVariable Long tournamentID, @PathVariable Long teamID) throws Exception {
-//        Tournament thisTournament = tournamentService.getTournamentById(tournamentID);
-//        Team thisTeam = teamService.getTeamById(teamID).get();
-//
-//        thisTournament.removeTeam(thisTeam);
-//
-//        //tournamentService.addTournamentTeams(tournamentID, thisTeam);
-//
-//        return thisTeam + " was added to " + thisTournament;
-//    }
 }

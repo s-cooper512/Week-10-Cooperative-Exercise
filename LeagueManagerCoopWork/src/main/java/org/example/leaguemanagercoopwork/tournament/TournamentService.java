@@ -46,12 +46,4 @@ public class TournamentService {
     public List<Tournament> getAllTournaments() {
         return tournamentRepository.findAll();
     }
-
-    public void addTournamentTeams (Long id, Team team) throws Exception {
-        Tournament thisTournament = getTournamentById(id);
-        List<Team> tournamentTeams = thisTournament.getTeams();
-        tournamentTeams.add(team);
-        thisTournament.setTeams(tournamentTeams);
-        tournamentRepository.save(thisTournament);
-    }
 }
