@@ -5,6 +5,8 @@ import org.example.leaguemanagercoopwork.player.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/players") // maps this to all methods in class
 public class PlayerController {
@@ -23,6 +25,11 @@ public class PlayerController {
     @GetMapping("/{id}")
     public Player getPlayerById(Long id) throws Exception {
         return playerService.getPlayerById(id);
+    }
+
+    @GetMapping
+    public List<Player> getAllPlayers() {
+        return playerService.getAllPlayers();
     }
 
     // update player details

@@ -3,6 +3,8 @@ package org.example.leaguemanagercoopwork.player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayerService {
 
@@ -18,6 +20,10 @@ public class PlayerService {
     public Player getPlayerById(Long id) throws Exception {
         return playerRepository.findById(id)
                 .orElseThrow(() -> new Exception("Player not found with id " + id));
+    }
+
+    public List<Player> getAllPlayers() {
+        return playerRepository.findAll();
     }
 
     // update player details
