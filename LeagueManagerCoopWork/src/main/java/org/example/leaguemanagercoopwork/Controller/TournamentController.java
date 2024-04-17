@@ -51,6 +51,24 @@ public class TournamentController {
         tournamentService.deleteTournament(id);
     }
 
+    // ========== ADDITIONAL FUNCTIONALITY ==============
+    // Add a team to a tournament
+    @PostMapping("/{tournamentId}/teams/{teamId}")
+    public void addTeamToTournament(@PathVariable Long tournamentId, @PathVariable Long teamId) throws Exception {
+        tournamentService.addTeamToTournament(tournamentId, teamId);
+    }
+
+    // delete team from tournament
+    @DeleteMapping("/{tournamentId}/teams/{teamId}")
+    public void deleteTeamFromTournament(@PathVariable Long tournamentId, @PathVariable Long teamId) throws Exception {
+        tournamentService.deleteTeamFromTournament(tournamentId, teamId);
+    }
+
+    // get all teams in a tournament
+    @GetMapping("/{id}/teams")
+    public List<Team> getAllTeamsInTournament(@PathVariable Long id) throws Exception {
+        return tournamentService.getAllTeamsInTournament(id);
+
     @GetMapping("/{ID}/players")
     public List<Player> getAllPlayersInTournament(@PathVariable Long ID) throws Exception {
         return tournamentService.getAllPlayersInTournament(ID);

@@ -12,7 +12,7 @@ import java.util.Optional;
 public class TeamService {
 
     @Autowired
-    private TeamRepository teamRepository;
+    private ITeamRepository teamRepository;
 
     @Autowired
     private PlayerService playerService;
