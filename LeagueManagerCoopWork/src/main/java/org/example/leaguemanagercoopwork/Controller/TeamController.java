@@ -1,5 +1,7 @@
 package org.example.leaguemanagercoopwork.controller;
 
+import org.example.leaguemanagercoopwork.player.Player;
+import org.example.leaguemanagercoopwork.player.PlayerService;
 import org.example.leaguemanagercoopwork.team.Team;
 import org.example.leaguemanagercoopwork.team.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ import java.util.Optional;
 public class TeamController {
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private PlayerService playerService;
 
     @GetMapping
     public List<Team> getAllTeams() {
@@ -32,16 +37,7 @@ public class TeamController {
 
     @PutMapping("/{ID}")
     public String updateTeamByID (@PathVariable long ID, @RequestBody Team updatedTeam) {
-        Optional<Team> oldTeam = teamService.getTeamById(ID);
-        if (oldTeam.isPresent()) {
-            Team destinationTeam = oldTeam.get();
-            destinationTeam.setId(updatedTeam.getId());
-            destinationTeam.setName(updatedTeam.getName());
-            destinationTeam.setPlayers(updatedTeam.getPlayers());
-            return "Team updated successfully!";
-        }
-
-        return "Team failed to update or was not found...";
+        return teamService.updateTeam(ID, updatedTeam);
     }
 
     @PostMapping
@@ -49,4 +45,17 @@ public class TeamController {
         teamService.saveTeam(newTeam);
         return "Team added successfully!";
     }
+
+//    @PutMapping("/{teamID}/{playerID}")
+//    public String addPlayerToTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
+//        Optional<Team> thisTeam = teamService.getTeamById(teamID);
+//        Team tempTeam = thisTeam.get();
+//        List<Player> existingPlayersOnTeam = tempTeam.getPlayers();
+//        Player thisPlayer = playerService.getPlayerById(playerID);
+//
+//        existingPlayersOnTeam.add(thisPlayer);
+//        tempTeam.setPlayers(existingPlayersOnTeam);
+//
+//        return teamService.updateTeam(teamID, tempTeam);
+//    }
 }

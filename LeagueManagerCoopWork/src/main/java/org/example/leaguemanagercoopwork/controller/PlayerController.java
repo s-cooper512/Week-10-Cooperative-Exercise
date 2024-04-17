@@ -23,7 +23,8 @@ public class PlayerController {
 
     // get player by ID
     @GetMapping("/{id}")
-    public Player getPlayerById(Long id) throws Exception {
+    public Player getPlayerById(@PathVariable Long id) throws Exception {
+
         return playerService.getPlayerById(id);
     }
 

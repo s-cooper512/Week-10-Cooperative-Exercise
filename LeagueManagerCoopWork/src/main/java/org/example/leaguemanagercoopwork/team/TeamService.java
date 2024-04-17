@@ -27,4 +27,18 @@ public class TeamService {
     public void deleteTeam(Long id) {
         teamRepository.deleteById(id);
     }
+
+    public String updateTeam (Long id, Team team) {
+        Optional<Team> oldTeam = getTeamById(id);
+        if (oldTeam.isPresent()) {
+            Team destinationTeam = oldTeam.get();
+            destinationTeam.setId(team.getId());
+            destinationTeam.setName(team.getName());
+            destinationTeam.setPlayers(team.getPlayers());
+
+            teamRepository.save(destinationTeam);
+            return "Team updated successfully!";
+        }
+        return "Team failed to update...";
+    }
 }
