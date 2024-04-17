@@ -1,5 +1,7 @@
 package org.example.leaguemanagercoopwork.team;
 
+import org.example.leaguemanagercoopwork.player.Player;
+import org.example.leaguemanagercoopwork.player.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,9 @@ public class TeamService {
 
     @Autowired
     private ITeamRepository teamRepository;
+
+    @Autowired
+    private PlayerService playerService;
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
@@ -40,5 +45,27 @@ public class TeamService {
             return "Team updated successfully!";
         }
         return "Team failed to update...";
+    }
+
+    public String addPlayerToTeam (Long teamID, Long playerID) throws Exception {
+        Optional<Team> thisTeam = getTeamById(teamID);
+        Team tempTeam = thisTeam.get();
+        Player thisPlayer = playerService.getPlayerById(playerID);
+
+        thisPlayer.setTeam(tempTeam);
+        playerService.createPlayer(thisPlayer);
+
+        return thisPlayer.getName() + " moved to " + tempTeam.getName();
+    }
+
+    public String removePlayerFromTeam (Long teamID, Long playerID) throws Exception {
+        Optional<Team> thisTeam = getTeamById(teamID);
+        Team tempTeam = thisTeam.get();
+        Player thisPlayer = playerService.getPlayerById(playerID);
+
+        thisPlayer.setTeam(null);
+        playerService.createPlayer(thisPlayer);
+
+        return thisPlayer.getName() + " removed from " + tempTeam.getName();
     }
 }

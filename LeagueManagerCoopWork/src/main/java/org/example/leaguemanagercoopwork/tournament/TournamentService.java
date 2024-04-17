@@ -1,10 +1,12 @@
 package org.example.leaguemanagercoopwork.tournament;
 
 import org.example.leaguemanagercoopwork.team.ITeamRepository;
+import org.example.leaguemanagercoopwork.player.Player;
 import org.example.leaguemanagercoopwork.team.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -93,5 +95,15 @@ public class TournamentService {
 
         // return a list of teams belonging to the tournament
         return tournament.getTeams();
+    }
+
+    public List<Player> getAllPlayersInTournament(Long ID) throws Exception {
+        List<Team> allTeams = getTournamentById(ID).getTeams();
+        List<Player> playerList = new ArrayList<>();
+        allTeams.forEach(team -> {
+            playerList.addAll(team.getPlayers());
+        });
+
+        return playerList;
     }
 }

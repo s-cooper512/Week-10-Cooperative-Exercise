@@ -1,12 +1,15 @@
 package org.example.leaguemanagercoopwork.controller;
 
+import org.example.leaguemanagercoopwork.player.Player;
 import org.example.leaguemanagercoopwork.team.Team;
+import org.example.leaguemanagercoopwork.team.TeamService;
 import org.example.leaguemanagercoopwork.tournament.ITournamentRepository;
 import org.example.leaguemanagercoopwork.tournament.Tournament;
 import org.example.leaguemanagercoopwork.tournament.TournamentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("/tournaments")
@@ -65,5 +68,9 @@ public class TournamentController {
     @GetMapping("/{id}/teams")
     public List<Team> getAllTeamsInTournament(@PathVariable Long id) throws Exception {
         return tournamentService.getAllTeamsInTournament(id);
+
+    @GetMapping("/{ID}/players")
+    public List<Player> getAllPlayersInTournament(@PathVariable Long ID) throws Exception {
+        return tournamentService.getAllPlayersInTournament(ID);
     }
 }
