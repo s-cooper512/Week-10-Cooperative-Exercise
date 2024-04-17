@@ -29,4 +29,9 @@ public class PlayerController {
     public Player updatePlayer(@PathVariable Long id, @RequestBody Player player) throws Exception {
         return playerService.updatePlayer(id, player);
     }
+
+    @DeleteMapping("/{id}")
+    public void deletePlayer(@PathVariable Long id) throws Exception {
+        playerService.deletePlayer(id);
+    }
 }

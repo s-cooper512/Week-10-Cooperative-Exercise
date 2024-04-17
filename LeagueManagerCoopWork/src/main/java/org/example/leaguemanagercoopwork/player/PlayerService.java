@@ -27,4 +27,11 @@ public class PlayerService {
 
         return playerRepository.save(player); // saves to the database
     }
+
+    public void deletePlayer(Long id) throws Exception {
+        Player player = playerRepository.findById(id)
+                        .orElseThrow(() -> new Exception("Player not found with ID"));
+
+        playerRepository.delete(player);
+    }
 }
