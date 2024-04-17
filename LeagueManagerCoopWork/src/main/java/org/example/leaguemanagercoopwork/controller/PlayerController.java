@@ -12,24 +12,26 @@ public class PlayerController {
     @Autowired
     PlayerService playerService;
 
-    // create a new player
+    // ========== BASIC CRUD OPERATIONS ==============
+    // create new player
     @PostMapping // already has "/players" because of the @RequestMapping
     public Player createPlayer(@RequestBody Player player) {
         return playerService.createPlayer(player);
     }
 
-    // get a player by ID
+    // get player by ID
     @GetMapping("/{id}")
     public Player getPlayerById(Long id) throws Exception {
         return playerService.getPlayerById(id);
     }
 
-    // update a player's details
+    // update player details
     @PutMapping("/{id}")
     public Player updatePlayer(@PathVariable Long id, @RequestBody Player playerDetails) throws Exception {
         return playerService.updatePlayer(id, playerDetails);
     }
 
+    // delete player
     @DeleteMapping("/{id}")
     public void deletePlayer(@PathVariable Long id) throws Exception {
         playerService.deletePlayer(id);

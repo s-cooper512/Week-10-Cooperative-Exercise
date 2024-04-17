@@ -8,16 +8,19 @@ public class PlayerService {
 
     @Autowired
     IPlayerRepository playerRepository;
-
+    // ========== BASIC CRUD OPERATIONS ==============
+    // create new player
     public Player createPlayer(Player player) {
         return playerRepository.save(player);
     }
 
+    // get player by ID
     public Player getPlayerById(Long id) throws Exception {
         return playerRepository.findById(id)
                 .orElseThrow(() -> new Exception("Player not found with id " + id));
     }
 
+    // update player details
     public Player updatePlayer(Long id, Player playerDetails) throws Exception {
         Player playerToUpdate = playerRepository.findById(id) // finds an existing player we want to updated
                 .orElseThrow(() -> new Exception("Player not found with id " + id)); // throws exception if ID is not found
@@ -28,6 +31,7 @@ public class PlayerService {
         return playerRepository.save(playerToUpdate); // saves updated player to the database
     }
 
+    // delete player
     public void deletePlayer(Long id) throws Exception {
         Player playerToDelete = playerRepository.findById(id) // finds player by the ID and assigns to player object
                         .orElseThrow(() -> new Exception("Player not found with ID")); // 
