@@ -1,5 +1,7 @@
 package org.example.leaguemanagercoopwork.controller;
 
+import org.example.leaguemanagercoopwork.team.Team;
+import org.example.leaguemanagercoopwork.team.TeamService;
 import org.example.leaguemanagercoopwork.tournament.ITournamentRepository;
 import org.example.leaguemanagercoopwork.tournament.Tournament;
 import org.example.leaguemanagercoopwork.tournament.TournamentService;
@@ -14,6 +16,9 @@ public class TournamentController {
 
     @Autowired
     TournamentService tournamentService;
+
+    @Autowired
+    private TeamService teamService;
 
     // ========== BASIC CRUD OPERATIONS ==============
     // get all tournaments
@@ -46,4 +51,26 @@ public class TournamentController {
     public void deleteTournament(@PathVariable Long id) throws Exception {
         tournamentService.deleteTournament(id);
     }
+
+    @PutMapping("/{tournamentID}/{teamID}")
+    public String addTeamToTournament (@PathVariable Long tournamentID, @PathVariable Long teamID) throws Exception {
+        Tournament thisTournament = tournamentService.getTournamentById(tournamentID);
+        Team thisTeam = teamService.getTeamById(teamID).get();
+
+        tournamentService.addTournamentTeams(tournamentID, thisTeam);
+
+        return thisTeam + " was added to " + thisTournament;
+    }
+
+//    @DeleteMapping("/{tournamentID}/{teamID}")
+//    public String removeTeamFromTournament (@PathVariable Long tournamentID, @PathVariable Long teamID) throws Exception {
+//        Tournament thisTournament = tournamentService.getTournamentById(tournamentID);
+//        Team thisTeam = teamService.getTeamById(teamID).get();
+//
+//        thisTournament.removeTeam(thisTeam);
+//
+//        //tournamentService.addTournamentTeams(tournamentID, thisTeam);
+//
+//        return thisTeam + " was added to " + thisTournament;
+//    }
 }
