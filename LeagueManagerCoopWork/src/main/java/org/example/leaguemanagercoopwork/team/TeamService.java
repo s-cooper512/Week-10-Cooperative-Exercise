@@ -10,15 +10,15 @@ import java.util.Optional;
 public class TeamService {
 
     @Autowired
-    private static TeamRepository teamRepository;
+    private TeamRepository teamRepository;
 
     public List<Team> getAllTeams() {
         return teamRepository.findAll();
     }
 
-    public static Optional<Team> getTeamById(Long id) {
-        return teamRepository.findById(id);
-    }
+//    public static Optional<Team> getTeamById(Long id) {
+//        return teamRepository.findById(id);
+//    }
 
     public Team saveTeam(Team team) {
         return teamRepository.save(team);

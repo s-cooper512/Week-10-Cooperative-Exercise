@@ -1,5 +1,6 @@
 package org.example.leaguemanagercoopwork.team;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.example.leaguemanagercoopwork.player.Player;
@@ -15,7 +16,8 @@ public class Team {
 
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Player> players;
 }
 
