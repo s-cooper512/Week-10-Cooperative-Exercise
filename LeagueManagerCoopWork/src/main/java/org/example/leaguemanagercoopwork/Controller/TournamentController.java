@@ -70,8 +70,15 @@ public class TournamentController {
         return tournamentService.getAllTeamsInTournament(id);
     }
 
+    // get all players in a tournament
     @GetMapping("/{ID}/players")
     public List<Player> getAllPlayersInTournament(@PathVariable Long ID) throws Exception {
         return tournamentService.getAllPlayersInTournament(ID);
+    }
+
+    // get all players from a tournament with a limit
+    @GetMapping("/{id}/players/limit")
+    public List<Player> getPlayersFromTournamentWithLimit(@PathVariable Long id, @RequestParam(name = "limit", required = false, defaultValue = "10") int limit) throws Exception {
+        return tournamentService.getPlayersFromTournamentWithLimit(id, limit);
     }
 }

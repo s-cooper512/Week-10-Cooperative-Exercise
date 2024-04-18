@@ -1,5 +1,6 @@
 package org.example.leaguemanagercoopwork.tournament;
 
+import org.example.leaguemanagercoopwork.player.IPlayerRepository;
 import org.example.leaguemanagercoopwork.team.ITeamRepository;
 import org.example.leaguemanagercoopwork.player.Player;
 import org.example.leaguemanagercoopwork.team.Team;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class TournamentService {
@@ -16,6 +18,8 @@ public class TournamentService {
     ITournamentRepository tournamentRepository;
     @Autowired
     ITeamRepository teamRepository;
+    @Autowired
+    IPlayerRepository playerRepository;
 
     // ========== BASIC CRUD OPERATIONS ==============
     // get all tournaments
@@ -105,5 +109,21 @@ public class TournamentService {
         });
 
         return playerList;
+    }
+
+    public List<Player> getPlayersFromTournamentWithLimit(Long id, int limit) throws Exception {
+        Tournament tournament = tournamentRepository.findById(id)
+                .orElseThrow(() -> new Exception("Unable to find tournament with ID " + id));
+        List<Team> teams = tournament.getTeams();
+        List<Player> players = new ArrayList<>();
+
+        // Iterate over teams to collect players
+        for (Team team : teams) {
+            players.addAll(team.getPlayers()); // add all players to the players
+        }
+
+        // Return the specified number of players
+        // .limit() will take the parameter in the URL and limit responses
+        return players.stream().limit(limit).collect(Collectors.toList());
     }
 }
