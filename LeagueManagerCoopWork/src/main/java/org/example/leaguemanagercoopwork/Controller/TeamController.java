@@ -43,12 +43,12 @@ public class TeamController {
         return "Team added successfully!";
     }
 
-    @PutMapping("/{teamID}/{playerID}")
+    @PutMapping("/{teamID}/players/{playerID}")
     public String addPlayerToTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
         return teamService.addPlayerToTeam(teamID, playerID);
     }
 
-    @DeleteMapping("/{teamID}/{playerID}")
+    @DeleteMapping("/{teamID}/players/{playerID}")
     public String removePlayerFromTeam (@PathVariable long teamID, @PathVariable long playerID) throws Exception {
         return teamService.removePlayerFromTeam(teamID, playerID);
     }
